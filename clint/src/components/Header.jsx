@@ -31,7 +31,7 @@ const Header = () => {
           font-bold leading-tight animate-fade-in-down"
           style={{ animationDelay: "0.4s", animationFillMode: "backwards" }}
         >
-          JotFlow
+          Folyo
         </h1>
 
         <p
