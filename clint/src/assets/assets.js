@@ -32,7 +32,10 @@ import dashboard_icon_2 from "./dashboard_icon_2.svg";
 import dashboard_icon_3 from "./dashboard_icon_3.svg";
 import dashboard_icon_4 from "./dashboard_icon_4.svg";
 
-import folyo from "./logo.svg";
+import linkedin_logo from "./linkedin_logo.png";
+import github_icon from "./github_icon.png";
+
+import folyo from "./folyo.png";
 
 export const assets = {
   facebook_icon,
@@ -40,6 +43,8 @@ export const assets = {
   twitter_icon,
   logo,
   folyo,
+  github_icon,
+  linkedin_logo,
   arrow,
   logo_light,
   blog_icon,
@@ -264,21 +269,27 @@ export const dashboard_data = {
 
 export const footer_data = [
   {
-    title: "Quick Links",
-    links: ["Home", "Best Sellers", "Offers & Deals", "Contact Us", "FAQs"],
+    title: "Categories",
+    links: ["Technology", "Lifestyle", "Business", "Science", "Culture"],
   },
   {
-    title: "Need Help?",
+    title: "Social",
     links: [
-      "Delivery Information",
-      "Return & Refund Policy",
-      "Payment Methods",
-      "Track your Order",
-      "Contact Us",
+      {
+        name: "GitHub",
+        icon: assets.github_icon,
+        url: "https://github.com/amngairola",
+      },
+      {
+        name: "Twitter",
+        icon: assets.twitter_icon,
+        url: "https://x.com/amanngairola",
+      },
+      {
+        name: "LinkedIn",
+        icon: assets.linkedin_logo,
+        url: "https://www.linkedin.com/in/aman-gairola-8ba2a7244/",
+      },
     ],
-  },
-  {
-    title: "Follow Us",
-    links: ["Instagram", "Twitter", "Facebook", "YouTube"],
   },
 ];

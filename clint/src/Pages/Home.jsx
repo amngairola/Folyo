@@ -12,6 +12,7 @@ const Home = () => {
       <Header />
       <BlogList />
       <NewsLetter />
+      <Footer />
     </>
   );
 };

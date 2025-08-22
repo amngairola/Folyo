@@ -7,7 +7,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-between items-center py-4 px-8 sm:px-20 xl:px-32 bg-white shadow-md">
+    <div className="flex justify-between items-center py-2 px-6 sm:px-16 xl:px-28 bg-white shadow-md">
       <img
         onClick={() => navigate("/")}
         src={assets.folyo}
