@@ -1,36 +1,36 @@
 import React from "react";
 import { assets } from "../assets/assets";
-import "../index.css";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-between items-center py-2 px-6 sm:px-16 xl:px-28 bg-white shadow-md">
-      <img
-        onClick={() => navigate("/")}
-        src={assets.folyo}
-        alt="logo"
-        className="w-32 sm:w-44"
-      />
-
-      <button
-        onClick={() => navigate("/admin")}
-        className="group flex items-center gap-2 rounded-full bg-green-600 px-6 py-2 font-semibold text-white
-                   shadow-md shadow-green-500/30 transition-all 
-                   hover:bg-green-700 hover:shadow-lg 
-                   active:scale-95 
-                   focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-      >
-        Login
+    <header
+      className="sticky top-2 z-50
+     bg-white rounded-m border-gray-400  ml-5 mr-5"
+    >
+      <div className="flex justify-between items-center max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <img
-          src={assets.arrow}
-          alt="login icon"
-          className="w-3 transition-transform group-hover:translate-x-1"
+          onClick={() => navigate("/")}
+          src={assets.folyo}
+          alt="Folyo logo"
+          className="w-28 sm:w-32 cursor-pointer"
         />
-      </button>
-    </div>
+
+        <button
+          onClick={() => navigate("/admin")}
+          className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-green-700 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+        >
+          Login
+          <img
+            src={assets.arrow}
+            alt="login icon"
+            className="w-3 transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </button>
+      </div>
+    </header>
   );
 };
 
