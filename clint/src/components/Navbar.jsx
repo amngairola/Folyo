@@ -10,7 +10,7 @@ const Navbar = () => {
     <div className="flex justify-between items-center py-4 px-8 sm:px-20 xl:px-32 bg-white shadow-md">
       <img
         onClick={() => navigate("/")}
-        src={assets.logo}
+        src={assets.folyo}
         alt="logo"
         className="w-32 sm:w-44"
       />
