@@ -19,14 +19,14 @@ const Navbar = () => {
         />
 
         <button
-          onClick={() => navigate("/admin")}
-          className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-green-700 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+          onClick={() => navigate("/*")}
+          className="bg-transparent border-none p-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 transition-transform active:scale-95"
         >
-          Login
+          {" "}
           <img
-            src={assets.arrow}
+            src={assets.login_icon}
             alt="login icon"
-            className="w-3 transition-transform duration-300 group-hover:translate-x-1"
+            className="w-10 h-10 cursor-pointer hover:opacity-80"
           />
         </button>
       </div>

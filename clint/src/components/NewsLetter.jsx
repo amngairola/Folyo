@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { assets } from "../assets/assets";
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
@@ -31,14 +32,15 @@ const NewsLetter = () => {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-5 py-3 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-5 py-3 rounded-md border-gray-300 focus:outline-none ring-2 ring-green-500"
           />
 
-          <button
-            className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-md shadow-md hover:bg-green-700 transition-all duration-300"
-            type="submit"
-          >
-            Subscribe
+          <button className="bg-transparent border-none p-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 transition-transform active:scale-95">
+            <img
+              src={assets.subscribe_icon}
+              alt="subscribe "
+              className="w-12 h-13 cursor-pointer hover:opacity-80"
+            />
           </button>
         </form>
       </div>

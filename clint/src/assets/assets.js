@@ -36,11 +36,18 @@ import linkedin_logo from "./linkedin_logo.png";
 import github_icon from "./github_icon.png";
 
 import folyo from "./folyo.png";
-
+import submit_icon from "./submit_icon.png";
+import login_icon from "./login_icon.png";
+import subscribe_icon from "./subscribe_icon.png";
+import copy_icon from "./copy_icon.png";
 export const assets = {
   facebook_icon,
   googleplus_icon,
   twitter_icon,
+  submit_icon,
+  login_icon,
+  subscribe_icon,
+  copy_icon,
   logo,
   folyo,
   github_icon,
