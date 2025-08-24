@@ -5,11 +5,13 @@ import NotFoundPage from "./NotFoundPage";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ShareButtons from "../components/ShareButtons";
+import Loader from "../components/Loader";
 
 const Blog = () => {
   // --- Hooks and State Management (No changes needed here) ---
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [commentData, setCommentData] = useState({
     userName: "",
     userText: "",
@@ -21,10 +23,16 @@ const Blog = () => {
     const currentBlog = blog_data.find((post) => post._id === id);
     if (currentBlog) {
       setBlog(currentBlog);
+      setLoading(false);
     }
   }, [id]);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   if (!blog) {
+    return <Loader />;
     return <NotFoundPage />;
   }
 
@@ -42,6 +50,7 @@ const Blog = () => {
 
   const currentUrl = window.location.href;
   // --- Updated JSX for LinkedIn-style UI ---
+
   return (
     <>
       <Navbar />

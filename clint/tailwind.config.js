@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+import forms from "@tailwindcss/forms";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       animation: {
+        "move-lr": "moveLeftRight 2s ease-in-out infinite",
         "fade-in-down": "fade-in-down 0.6s ease-out forwards",
       },
       keyframes: {
@@ -17,15 +19,12 @@ export default {
             transform: "translateY(0)",
           },
         },
-      },
-
-      colors: {
-        primary: colors.green["600"],
-        // You can also define shades
-        "primary-light": colors.green["500"],
-        "primary-dark": colors.green["700"],
+        moveLeftRight: {
+          "0%, 100%": { transform: "translateX(-50px)" },
+          "50%": { transform: "translateX(50px)" },
+        },
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [forms],
 };

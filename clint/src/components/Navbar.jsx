@@ -19,7 +19,7 @@ const Navbar = () => {
         />
 
         <button
-          onClick={() => navigate("/*")}
+          onClick={() => navigate("/login")}
           className="bg-transparent border-none p-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 transition-transform active:scale-95"
         >
           {" "}

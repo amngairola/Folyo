@@ -40,11 +40,15 @@ import submit_icon from "./submit_icon.png";
 import login_icon from "./login_icon.png";
 import subscribe_icon from "./subscribe_icon.png";
 import copy_icon from "./copy_icon.png";
+import loading_icon from "./loading_icon.png";
+import user_logout_icon from "./user_logout_icon.png";
 export const assets = {
   facebook_icon,
   googleplus_icon,
+  loading_icon,
   twitter_icon,
   submit_icon,
+  user_logout_icon,
   login_icon,
   subscribe_icon,
   copy_icon,

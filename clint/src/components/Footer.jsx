@@ -17,9 +17,9 @@ const Footer = () => {
           <div className="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-8">
             {footer_data.map((section, index) => (
               <div key={index}>
-                <h3 className="text-white font-semibold mb-4">
-                  {section.title}
-                </h3>
+                <h4 className="text-white font-semibold mb-4">
+                  {section.title == "Social" ? `Stay connected` : section.title}
+                </h4>
 
                 {/* Check if the title is "Social" to render icons instead of text links */}
                 {section.title === "Social" ? (
@@ -35,7 +35,7 @@ const Footer = () => {
                         <img
                           src={link.icon}
                           alt={link.name}
-                          className="w-6 h-6"
+                          className="w-8 h-8"
                         />
                       </a>
                     ))}
