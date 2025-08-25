@@ -1,6 +1,6 @@
 # Folyo - A Modern Full-Stack Blog Platform 📝
 
-Folyo is a clean, responsive, and feature-rich blog application built from the ground up. It provides a seamless experience for both readers and administrators, with a focus on performance and a great user interface.
+Folyo is a clean, responsive, and feature-rich blog application built from the ground up. It provides a seamless experience for both readers and administrators, with a focus on performance and a great user interface
 
 **Live Demo**: `https://try-folyo.vercel.app/`
 
