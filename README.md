@@ -83,14 +83,18 @@ This application is set up for continuous deployment on **Vercel**. Every push t
 
 ## Screenshots 📸
 
-``
+
 _Homepage_
 ![Folyo Homepage](./clint/src/assets/ss_home.png)
 
-`[Add a screenshot of your Blog Post Page here]`
+_Blog Post_
 ![Folyo Blog Post](./clint/src/assets/ss_blog.png)
 ![Folyo Blog Post](./clint/src/assets/ss_blogs.png)
 
-`[Add a screenshot of your Admin Dashboard here]`
+
 _Admin Dashboard_
 ![Folyo Admin Dashboard](./clint/src/assets/ss_admin.png)
+
+## License
+
+Copyright (c) 2025 Folyo. All Rights Reserved.
