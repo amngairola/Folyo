@@ -45,7 +45,16 @@ import copy_icon from "./copy_icon.png";
 import loading_icon from "./loading_icon.png";
 import user_logout_icon from "./user_logout_icon.png";
 import UnderConstructionPage_icon from "./UnderConstruction_icon.png";
+
+import ss_admin from "./ss_admin.png";
+import ss_blog from "./ss_blog.png";
+import ss_blogs from "./ss_blogs.png";
+import ss_home from "./ss_home.png";
 export const assets = {
+  ss_home,
+  ss_blogs,
+  ss_blog,
+  ss_admin,
   facebook_icon,
   googleplus_icon,
   loading_icon,
