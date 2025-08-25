@@ -27,10 +27,12 @@ import star_icon from "./star_icon.svg";
 import cross_icon from "./cross_icon.svg";
 import home_icon from "./home_icon.svg";
 import gradientBackground from "./gradientBackground.png";
-import dashboard_icon_1 from "./dashboard_icon_1.svg";
-import dashboard_icon_2 from "./dashboard_icon_2.svg";
-import dashboard_icon_3 from "./dashboard_icon_3.svg";
-import dashboard_icon_4 from "./dashboard_icon_4.svg";
+import dashboard_icon_1 from "./dashboard_blogs_icon_1.png";
+import dashboard_icon_2 from "./dashboard_blogs_icon_2.png";
+import dashboard_icon_3 from "./dashboard_blogs_icon_3.png";
+import dashboard_icon_4 from "./dashboard_blogs_icon_4.png";
+
+import blog_delete_icon from "./blog_delete_icon.png";
 
 import linkedin_logo from "./linkedin_logo.png";
 import github_icon from "./github_icon.png";
@@ -42,13 +44,16 @@ import subscribe_icon from "./subscribe_icon.png";
 import copy_icon from "./copy_icon.png";
 import loading_icon from "./loading_icon.png";
 import user_logout_icon from "./user_logout_icon.png";
+import UnderConstructionPage_icon from "./UnderConstruction_icon.png";
 export const assets = {
   facebook_icon,
   googleplus_icon,
   loading_icon,
   twitter_icon,
+  UnderConstructionPage_icon,
   submit_icon,
   user_logout_icon,
+  blog_delete_icon,
   login_icon,
   subscribe_icon,
   copy_icon,
@@ -274,7 +279,7 @@ export const comments_data = [
 export const dashboard_data = {
   blogs: 10,
   comments: 5,
-  drafts: 0,
+  drafts: 1,
   recentBlogs: blog_data.slice(0, 5),
 };
 

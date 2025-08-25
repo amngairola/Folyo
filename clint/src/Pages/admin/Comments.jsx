@@ -1,7 +1,8 @@
 import React from "react";
+import UnderConstructionPage from "../UnderConstructionPage";
 
 const Comments = () => {
-  return <div>Comments</div>;
+  return <UnderConstructionPage />;
 };
 
 export default Comments;

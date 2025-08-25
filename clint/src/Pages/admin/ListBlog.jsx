@@ -1,7 +1,8 @@
 import React from "react";
+import UnderConstructionPage from "../UnderConstructionPage";
 
 const ListBlog = () => {
-  return <div>Blog BlogList</div>;
+  return <UnderConstructionPage />;
 };
 
 export default ListBlog;
