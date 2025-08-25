@@ -68,10 +68,10 @@ You will need Node.js and npm (or yarn) installed on your machine.
     npm install
     ```
 4.  **Run the development server**
-    `sh
+     ```sh
 npm run dev
 `
-    The application will be available at `https://try-folyo.vercel.app/` .
+   The application will be available at `http://localhost:5173/` .
 
 ---
 
