@@ -57,7 +57,7 @@ You will need Node.js and npm (or yarn) installed on your machine.
 
 1.  **Clone the repo**
     ```sh
-    git clone [https://github.com/amngairola/Folyo](https://github.com/amngairola/Folyo)
+    git clone https://github.com/amngairola/Folyo
     ```
 2.  **Navigate to the project directory**
     ```sh
@@ -69,8 +69,8 @@ You will need Node.js and npm (or yarn) installed on your machine.
     ```
 4.  **Run the development server**
      ```sh
-npm run dev
-`
+   npm run dev
+     ```
    The application will be available at `http://localhost:5173/` .
 
 ---
