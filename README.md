@@ -57,7 +57,7 @@ You will need Node.js and npm (or yarn) installed on your machine.
 
 1.  **Clone the repo**
     ```sh
-    git clone [https://github.com/amngairola/Folyo](https://github.com/amngairola/Folyo)
+    git clone https://github.com/amngairola/Folyo
     ```
 2.  **Navigate to the project directory**
     ```sh
@@ -68,10 +68,10 @@ You will need Node.js and npm (or yarn) installed on your machine.
     npm install
     ```
 4.  **Run the development server**
-    `sh
-npm run dev
-`
-    The application will be available at `https://try-folyo.vercel.app/` .
+     ```sh
+   npm run dev
+     ```
+   The application will be available at `http://localhost:5173/` .
 
 ---
 
@@ -83,14 +83,18 @@ This application is set up for continuous deployment on **Vercel**. Every push t
 
 ## Screenshots 📸
 
-``
+
 _Homepage_
 ![Folyo Homepage](./clint/src/assets/ss_home.png)
 
-`[Add a screenshot of your Blog Post Page here]`
+_Blog Post_
 ![Folyo Blog Post](./clint/src/assets/ss_blog.png)
 ![Folyo Blog Post](./clint/src/assets/ss_blogs.png)
 
-`[Add a screenshot of your Admin Dashboard here]`
+
 _Admin Dashboard_
 ![Folyo Admin Dashboard](./clint/src/assets/ss_admin.png)
+
+## License
+
+Copyright (c) 2025 Folyo. All Rights Reserved.
