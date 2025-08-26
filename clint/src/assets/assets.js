@@ -45,6 +45,7 @@ import copy_icon from "./copy_icon.png";
 import loading_icon from "./loading_icon.png";
 import user_logout_icon from "./user_logout_icon.png";
 import UnderConstructionPage_icon from "./UnderConstruction_icon.png";
+import comments_approved_icon from "./comments_approved_icon.png";
 
 import ss_admin from "./ss_admin.png";
 import ss_blog from "./ss_blog.png";
@@ -52,6 +53,7 @@ import ss_blogs from "./ss_blogs.png";
 import ss_home from "./ss_home.png";
 export const assets = {
   ss_home,
+  comments_approved_icon,
   ss_blogs,
   ss_blog,
   ss_admin,
@@ -238,8 +240,8 @@ export const comments_data = [
     name: "Michael Scott",
     content: "This is my new comment",
     isApproved: false,
-    createdAt: "2025-04-30T09:30:06.918Z",
-    updatedAt: "2025-04-30T09:30:06.918Z",
+    createdAt: "2025-08-30T09:30:06.918Z",
+    updatedAt: "2025-08-30T09:30:06.918Z",
     __v: 0,
   },
   {
@@ -248,8 +250,8 @@ export const comments_data = [
     name: "John Doe",
     content: "This is a nice blog",
     isApproved: false,
-    createdAt: "2025-04-29T10:17:54.832Z",
-    updatedAt: "2025-04-29T10:17:54.832Z",
+    createdAt: "2025-08-29T10:17:54.832Z",
+    updatedAt: "2025-08-29T10:17:54.832Z",
     __v: 0,
   },
   {
@@ -258,8 +260,8 @@ export const comments_data = [
     name: "Jack London",
     content: "Hi this blog is must to read",
     isApproved: true,
-    createdAt: "2025-04-22T11:12:46.547Z",
-    updatedAt: "2025-04-22T11:13:10.015Z",
+    createdAt: "2025-08-22T11:12:46.547Z",
+    updatedAt: "2025-08-22T11:13:10.015Z",
     __v: 0,
   },
   {
@@ -268,8 +270,8 @@ export const comments_data = [
     name: "Sam Smith",
     content: "This is the best blog, everybody should read it",
     isApproved: false,
-    createdAt: "2025-04-22T10:34:22.020Z",
-    updatedAt: "2025-04-22T10:34:22.020Z",
+    createdAt: "2025-08-22T10:34:22.020Z",
+    updatedAt: "2025-08-22T10:34:22.020Z",
     __v: 0,
   },
   {
@@ -279,8 +281,8 @@ export const comments_data = [
     content:
       "Honestly, I did not expect this to work, but it totally did. Saved my project!",
     isApproved: true,
-    createdAt: "2025-04-22T09:42:00.444Z",
-    updatedAt: "2025-04-22T10:24:55.626Z",
+    createdAt: "2025-08-22T09:42:00.444Z",
+    updatedAt: "2025-08-22T10:24:55.626Z",
     __v: 0,
   },
 ];
