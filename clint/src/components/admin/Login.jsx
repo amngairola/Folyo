@@ -20,11 +20,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("user data in login ", userData);
-    setUserData({
-      email: "",
-      password: "",
-    });
+    // console.log("user data in login ", userData);
+    // setUserData({
+    //   email: "",
+    //   password: "",
+    // });
     navigate("/admin");
   };
   return (
