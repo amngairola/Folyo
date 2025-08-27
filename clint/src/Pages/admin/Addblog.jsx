@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { assets } from "../../assets/assets";
+import Quill from "quill";
 
 const Addblog = () => {
   const [image, setImage] = useState(null);
@@ -8,10 +9,10 @@ const Addblog = () => {
   const [blogData, setBlogData] = useState({
     title: "",
     subTitle: "",
-    description: "",
     category: "Technology",
     isPublished: false,
   });
+  const [description, setDescription] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -32,11 +33,13 @@ const Addblog = () => {
     formData.append("image", image);
     formData.append("title", blogData.title);
     formData.append("subTitle", blogData.subTitle);
-    formData.append("description", blogData.description);
+    formData.append("description", description);
     formData.append("category", blogData.category);
     formData.append("isPublished", blogData.isPublished);
 
     // Now we can send this formData to your backend API
+    console.log("Submitting description:", description);
+
     console.log("FormData ready to be sent:", ...formData.entries());
 
     // Reset form after submission
@@ -44,11 +47,32 @@ const Addblog = () => {
     setBlogData({
       title: "",
       subTitle: "",
-      description: "",
       category: "Technology",
       isPublished: false,
     });
+    (quillRef.current.root.innerHTML = ""), setDescription("");
   };
+  // text editor
+
+  const handleGenerateWithAi = () => {
+    console.log("genrate With Ai working");
+  };
+  const editorRef = useRef(null);
+  const quillRef = useRef(null);
+
+  useEffect(() => {
+    if (!quillRef.current && editorRef.current) {
+      quillRef.current = new Quill(editorRef.current, {
+        theme: "snow",
+        placeholder: "Write your blog description here...",
+      });
+
+      quillRef.current.on("text-change", () => {
+        const html = quillRef.current.root.innerHTML;
+        setDescription(html); // Update the React state
+      });
+    }
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4 sm:p-8">
@@ -128,22 +152,35 @@ const Addblog = () => {
               </div>
             </div>
           </div>
-
+          {/* ---------- description text editor */}
           <div>
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Description
             </label>
-            <textarea
-              name="description"
-              value={blogData.description}
-              onChange={handleChange}
-              rows="8"
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-shadow hover:shadow-md"
-            />
+
+            {/* Styled container for the Quill editor */}
+            <div ref={editorRef} style={{ minHeight: "250px" }}></div>
+
+            {/* Styled "Generate with AI" button */}
+            <button
+              type="button" // Use type="button" to prevent form submission
+              onClick={handleGenerateWithAi}
+              className="mt-4 inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Generate with AI
+              {/* Optional: Add a spark icon for better UI */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M10 3.5a1.5 1.5 0 013 0V5a1 1 0 001 1h1.5a1.5 1.5 0 010 3H14a1 1 0 00-1 1v1.5a1.5 1.5 0 01-3 0V10a1 1 0 00-1-1H7.5a1.5 1.5 0 010-3H9a1 1 0 001-1V3.5zM3.5 10a1.5 1.5 0 010-3H5a1 1 0 001-1V4.5a1.5 1.5 0 013 0V6a1 1 0 001 1h1.5a1.5 1.5 0 010 3H10a1 1 0 00-1 1v1.5a1.5 1.5 0 01-3 0V12a1 1 0 00-1-1H3.5z" />
+              </svg>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

@@ -9,6 +9,7 @@ import DashBoard from "./Pages/admin/DashBoard";
 import Addblog from "./Pages/admin/Addblog";
 import Comments from "./Pages/admin/Comments";
 import ListBlog from "./Pages/admin/ListBlog";
+import "quill/dist/quill.snow.css";
 
 const App = () => {
   return (

@@ -50,32 +50,52 @@ const Comments = () => {
 
       {/*  comments table*/}
 
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Blog Title & Comments </th>
-              <th scope="col">Date </th>
-              <th scope="col">Action </th>
-            </tr>
-          </thead>
-          <tbody>
-            {comments
-              .filter((c) =>
-                filter === "Approved"
-                  ? c.isApproved === true
-                  : c.isApproved === false
-              )
-              .map((c, i) => (
-                <CommentTableItems
-                  key={c._id}
-                  comment={c}
-                  fetchComments={fetchComments}
-                  index={i + 1}
-                />
-              ))}
-          </tbody>
-        </table>
+      <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+        {/* This container makes the table scrollable */}
+        <div className="overflow-y-auto" style={{ maxHeight: "65vh" }}>
+          <table className="min-w-full divide-y divide-gray-200">
+            {/* The sticky header stays visible on scroll */}
+            <thead className="bg-gray-50 sticky top-0">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Blog Title & Comment
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Date
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Action
+                </th>
+              </tr>
+            </thead>
+
+            <tbody className="bg-white divide-y divide-gray-200">
+              {comments
+                .filter((c) =>
+                  filter === "Approved"
+                    ? c.isApproved === true
+                    : c.isApproved === false
+                )
+                .map((c, i) => (
+                  <CommentTableItems
+                    key={c._id}
+                    comment={c}
+                    fetchComments={fetchComments}
+                    index={i + 1}
+                  />
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
