@@ -38,7 +38,6 @@ const Addblog = () => {
     formData.append("isPublished", blogData.isPublished);
 
     // Now we can send this formData to your backend API
-    console.log("Submitting description:", description);
 
     console.log("FormData ready to be sent:", ...formData.entries());
 
@@ -50,7 +49,10 @@ const Addblog = () => {
       category: "Technology",
       isPublished: false,
     });
-    (quillRef.current.root.innerHTML = ""), setDescription("");
+    if (quillRef.current) {
+      quillRef.current.setText("");
+      setDescription("");
+    }
   };
   // text editor
 
