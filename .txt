@@ -1,0 +1,8 @@
+
+mongodb user
+Username - folyoapp
+Password - puB9yDk7gfIUYyWB
+
+URL - mongodb+srv://folyoapp:puB9yDk7gfIUYyWB@cluster0.7phuqhz.mongodb.net
+
+full url = mongodb+srv://folyoapp:puB9yDk7gfIUYyWB@cluster0.7phuqhz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
