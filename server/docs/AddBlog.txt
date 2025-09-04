@@ -17,7 +17,7 @@ Submit Button: A <button type="submit">.
 Step 2: Manage Form State
 Use the useState hook to manage the form's data. It's best to use separate states for the file and the text-based data.
 
-JavaScript
+
 
 const [image, setImage] = useState(null);
 const [description, setDescription] = useState(''); // For the Quill editor
@@ -27,6 +27,7 @@ const [blogData, setBlogData] = useState({
   category: 'Technology',
   isPublished: false,
 });
+
 Step 3: Handle Input Changes
 Create event handlers to update the state as the user interacts with the form.
 
@@ -49,11 +50,17 @@ Sends this FormData object to your backend API using a fetch or axios POST reque
 
 Resets the form fields after a successful submission.
 
+
+
+
+-----------------Backend----------------------------------
+
+
+
+
 Backend: Creating the API Endpoint (Node.js & Express)
 Step 1: Set Up the Server and Dependencies
 Install the necessary packages for your server.
-
-Bash
 
 npm i express mongoose cors dotenv jsonwebtoken multer
 Create a basic Express server in server.js that listens on a specified port.
@@ -73,7 +80,6 @@ Define the structure for your blog posts using a Mongoose schema (blog.js). This
 Step 4: Create the API Route
 Define the route that will handle the form submission.
 
-JavaScript
 
 // In blogRoutes.js
 import upload from '../middleware/multer.js';

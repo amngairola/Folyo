@@ -3,7 +3,13 @@ import express from "express";
 import upload from "../middleware/multer.js";
 // Import the controller function that creates the blog
 
-import { createBlog } from "../controllers/blogController.js";
+import {
+  createBlog,
+  deleteBlogById,
+  getAllBlog,
+  getBlogById,
+  togglePublish,
+} from "../controllers/blogController.js";
 import auth from "../middleware/auth.js";
 
 // Create a new router instance to manage blog-related routes
@@ -16,5 +22,10 @@ blogRouter.post(
   auth, // This middleware checks if the user is authenticated before proceeding
   createBlog // After the file is processed, this controller function is called to handle the logic
 );
+
+blogRouter.get("/all", getAllBlog);
+blogRouter.get("/:blogId", getBlogById);
+blogRouter.post("/delete", auth, deleteBlogById);
+blogRouter.post("/toggle-publish", auth, togglePublish);
 
 export default blogRouter;
