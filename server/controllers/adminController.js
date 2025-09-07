@@ -5,10 +5,11 @@ import comment from "../models/comment.js";
 // --- Admin Login Controller ---
 export const adminLogin = async (req, res) => {
   try {
+    console.log("req successfull");
+    // You should log req.body directly
+    console.log(req.body);
     const { email, password } = req.body;
 
-    // SECURITY WARNING: Never compare passwords in plain text.
-    // Use a library like bcrypt to compare a hashed password.
     if (
       email !== process.env.ADMIN_EMAIL ||
       password !== process.env.ADMIN_PASSWORD

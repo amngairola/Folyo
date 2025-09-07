@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { assets } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
+// import { axios } from "axios";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { axios, setToken } = useAppContext();
+
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
@@ -18,14 +23,31 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("user data in login ", userData);
+    console.log("user data in login ", userData);
     // setUserData({
     //   email: "",
     //   password: "",
     // });
-    navigate("/admin");
+
+    try {
+      const { data } = await axios.post("/api/admin/login", userData);
+      if (data.success) {
+        setToken(data.token);
+
+        localStorage.setItem("token", data.token);
+        axios.defaults.headers.common["Authorization"] = data.token;
+        navigate("/admin");
+        console.log(data.token);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+
+    // navigate("/admin");
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">

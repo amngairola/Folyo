@@ -10,15 +10,19 @@ import Addblog from "./Pages/admin/Addblog";
 import Comments from "./Pages/admin/Comments";
 import ListBlog from "./Pages/admin/ListBlog";
 import "quill/dist/quill.snow.css";
+import { Toaster } from "react-hot-toast";
+import { useAppContext } from "./context/AppContext";
 
 const App = () => {
+  const { token } = useAppContext();
   return (
     <div>
+      <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:id" element={<Blog />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={true ? <Layout /> : <Login />}>
+        <Route path="/admin" element={token ? <Layout /> : <Login />}>
           <Route index element={<DashBoard />} />
           <Route path="addblog" element={<Addblog />} />
           <Route path="listBlog" element={<ListBlog />} />

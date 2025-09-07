@@ -27,6 +27,7 @@ import star_icon from "./star_icon.svg";
 import cross_icon from "./cross_icon.svg";
 import home_icon from "./home_icon.svg";
 import gradientBackground from "./gradientBackground.png";
+import admin_DB_logo from "./admin_DB_logo.png";
 import dashboard_icon_1 from "./dashboard_blogs_icon_1.png";
 import dashboard_icon_2 from "./dashboard_blogs_icon_2.png";
 import dashboard_icon_3 from "./dashboard_blogs_icon_3.png";
@@ -53,6 +54,7 @@ import ss_blogs from "./ss_blogs.png";
 import ss_home from "./ss_home.png";
 export const assets = {
   ss_home,
+  admin_DB_logo,
   comments_approved_icon,
   ss_blogs,
   ss_blog,

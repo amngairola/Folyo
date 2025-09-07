@@ -1,12 +1,15 @@
 import React from "react";
 import { assets } from "../../assets/assets";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useAppContext } from "../../context/AppContext";
 
 const Layout = () => {
-  const navigate = useNavigate();
+  const { navigate, token, setToken } = useAppContext();
 
   const logout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
     navigate("/");
   };
   return (
@@ -25,15 +28,16 @@ const Layout = () => {
 
           <button
             onClick={logout}
-            className="bg-transparent border-none p-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 transition-transform active:scale-95"
+            className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-200 transition-colors"
           >
             {" "}
             <img
               src={assets.user_logout_icon}
               alt="login icon"
-              className="w-10 h-10 cursor-pointer hover:opacity-80"
+              className="w-5 h-5 "
               title="log out"
             />
+            logout
           </button>
         </div>
       </header>
