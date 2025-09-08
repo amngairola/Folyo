@@ -167,10 +167,10 @@ export const addComment = async (req, res) => {
 };
 export const getComment = async (req, res) => {
   try {
-    const { blogId } = req.body;
+    const { id } = req.params;
     const comments = await comment
       .find({
-        blog: blogId,
+        blog: id,
         isApproved: true,
       })
       .sort({

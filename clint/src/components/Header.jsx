@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import { assets } from "../assets/assets";
 import { Form } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
 const Header = () => {
+  const { input, setInput } = useAppContext();
+  const inputRef = useRef();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setInput(inputRef.current.value);
+  };
+
+  const onClear = () => {
+    setInput("");
+    inputRef.current.value = "";
+  };
+
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative py-20">
       <img
@@ -42,7 +55,10 @@ const Header = () => {
           startups, and lifestyle.
         </p>
 
-        <form className="group relative flex w-full max-w-md items-center rounded-full border border-gray-300 bg-white shadow-sm transition-all focus-within:ring-2 focus-within:ring-green-600 focus-within:ring-offset-2">
+        <form
+          onSubmit={handleSubmit}
+          className="group relative flex w-full max-w-md items-center rounded-full border border-gray-300 bg-white shadow-sm transition-all focus-within:ring-2 focus-within:ring-green-600 focus-within:ring-offset-2"
+        >
           {/* Search Icon */}
           <div className="pl-4">
             <svg
@@ -63,6 +79,7 @@ const Header = () => {
 
           {/* Input Field */}
           <input
+            ref={inputRef}
             type="text"
             placeholder="Search blogs"
             required
@@ -78,6 +95,17 @@ const Header = () => {
           </button>
         </form>
       </div>
+      {input && (
+        <div className="text-center">
+          <button
+            onClick={onClear}
+            type="submit"
+            className="rounded-full bg-green-600 px-5 py-2 mt-2 font-semibold text-white shadow-md shadow-green-500/50 transition-all hover:bg-green-700 active:scale-85"
+          >
+            Clear Search
+          </button>
+        </div>
+      )}
     </div>
   );
 };
