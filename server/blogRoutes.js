@@ -1,6 +1,6 @@
 import express from "express";
 // Import the Multer middleware for handling file uploads
-import upload from "../middleware/multer.js";
+import upload from "./middleware/multer.js";
 // Import the controller function that creates the blog
 
 import {
@@ -11,8 +11,8 @@ import {
   getBlogById,
   getComment,
   togglePublish,
-} from "../controllers/blogController.js";
-import auth from "../middleware/auth.js";
+} from "./controllers/blogController.js";
+import auth from "./middleware/auth.js";
 
 // Create a new router instance to manage blog-related routes
 const blogRouter = express.Router();

@@ -2,66 +2,42 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { assets } from "../../assets/assets";
 import Quill from "quill";
+import toast from "react-hot-toast";
+
+import { useAppContext } from "../../context/AppContext";
+import Loader from "../../components/Loader";
 
 const Addblog = () => {
+  // State specifically for the image file
   const [image, setImage] = useState(null);
 
+  // State for text-based form fields, grouped for easy management
   const [blogData, setBlogData] = useState({
     title: "",
     subTitle: "",
     category: "Technology",
     isPublished: false,
   });
+
+  // State specifically for the Quill editor's HTML content
   const [description, setDescription] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  // State to manage the loading status of the form submission
+  const [isAdding, setIsAdding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    setBlogData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+  // Get the pre-configured axios instance from the global context
+  const { axios } = useAppContext();
 
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("title", blogData.title);
-    formData.append("subTitle", blogData.subTitle);
-    formData.append("description", description);
-    formData.append("category", blogData.category);
-    formData.append("isPublished", blogData.isPublished);
-
-    // Now we can send this formData to your backend API
-
-    console.log("FormData ready to be sent:", ...formData.entries());
-
-    // Reset form after submission
-    setImage(null);
-    setBlogData({
-      title: "",
-      subTitle: "",
-      category: "Technology",
-      isPublished: false,
-    });
-    if (quillRef.current) {
-      quillRef.current.setText("");
-      setDescription("");
-    }
-  };
-  // text editor
+  // Refs to hold the Quill editor container and the Quill instance itself
+  const editorRef = useRef(null);
+  const quillRef = useRef(null);
 
   const handleGenerateWithAi = () => {
     console.log("genrate With Ai working");
   };
-  const editorRef = useRef(null);
-  const quillRef = useRef(null);
 
+  // Initialize the Quill editor once on component mount
   useEffect(() => {
     if (!quillRef.current && editorRef.current) {
       quillRef.current = new Quill(editorRef.current, {
@@ -69,12 +45,81 @@ const Addblog = () => {
         placeholder: "Write your blog description here...",
       });
 
+      // Listen for changes in the editor and sync its content with the React state
       quillRef.current.on("text-change", () => {
         const html = quillRef.current.root.innerHTML;
-        setDescription(html); // Update the React state
+        setDescription(html);
       });
     }
   }, []);
+
+  // Generic handler for standard form inputs (text, select, checkbox)
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setBlogData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  // Handler specifically for the file input
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  // Handler for submitting the form to the backend
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsAdding(true);
+    setIsLoading(true);
+
+    try {
+      // Consolidate all text data into a single object
+      const blog = {
+        title: blogData.title,
+        subTitle: blogData.subTitle,
+        description: description,
+        category: blogData.category,
+        isPublished: blogData.isPublished,
+      };
+
+      // Create a FormData object to handle the file upload
+      const formData = new FormData();
+      formData.append("blog", JSON.stringify(blog));
+      formData.append("image", image);
+
+      // Send the form data to the backend API
+      const { data } = await axios.post("/api/blog/add", formData);
+
+      if (data.success) {
+        toast.success(data.message);
+        // Reset all form fields to their initial state
+        setImage(null);
+        setBlogData({
+          title: "",
+          subTitle: "",
+          category: "Technology",
+          isPublished: false,
+        });
+        if (quillRef.current) {
+          // Correctly clear the Quill editor's content
+          quillRef.current.setText("");
+        }
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to add blog post.");
+    } finally {
+      // Ensure the loading state is reset, even if the request fails
+      setIsAdding(false);
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen p-4 sm:p-8">
@@ -82,6 +127,7 @@ const Addblog = () => {
         <h1 className="text-3xl font-bold mb-6">Add a New Blog Post</h1>
 
         <form
+          id="form"
           onSubmit={handleSubmit}
           className="p-8 bg-white rounded-lg shadow-md space-y-8"
         >
@@ -128,6 +174,7 @@ const Addblog = () => {
                   Title
                 </label>
                 <input
+                  id="title"
                   name="title"
                   value={blogData.title}
                   onChange={handleChange}
@@ -144,6 +191,7 @@ const Addblog = () => {
                   Sub-title
                 </label>
                 <input
+                  id="subTitle"
                   name="subTitle"
                   value={blogData.subTitle}
                   onChange={handleChange}
@@ -164,13 +212,17 @@ const Addblog = () => {
             </label>
 
             {/* Styled container for the Quill editor */}
-            <div ref={editorRef} style={{ minHeight: "250px" }}></div>
+            <div
+              id="description"
+              ref={editorRef}
+              style={{ minHeight: "250px" }}
+            ></div>
 
             {/* Styled "Generate with AI" button */}
             <button
               type="button" // Use type="button" to prevent form submission
               onClick={handleGenerateWithAi}
-              className="mt-4 inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="mt-4 inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Generate with AI
               {/* Optional: Add a spark icon for better UI */}
@@ -223,10 +275,11 @@ const Addblog = () => {
 
           <div className="flex justify-end">
             <button
+              disabled={isAdding}
               type="submit"
               className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-2 px-8 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             >
-              Add Blog
+              {isAdding ? "adding blog..." : "Add Blog"}
             </button>
           </div>
         </form>

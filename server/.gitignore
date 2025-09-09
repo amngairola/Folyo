@@ -1,0 +1,22 @@
+Dependencies
+/node_modules
+
+Environment variables
+.env
+
+Logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+Temporary files from Multer
+/uploads
+
+IDEs and editors
+.idea/
+.vscode/
+*.suo
+.ntvs
+*.njsproj
+*.sln
+*.sw?

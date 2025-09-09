@@ -21,9 +21,7 @@ export const adminLogin = async (req, res) => {
     }
 
     // If login is successful, create a JWT for authentication
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ email }, process.env.JWT_SECRET);
     res.json({
       success: true,
       token,
