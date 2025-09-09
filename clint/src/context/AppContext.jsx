@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 // Set the base URL for all Axios requests using an environment variable
-axios.defaults.baseURL = import.meta.env.VITE_BASE_LOCAL_URL;
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 // 1. Create the context to hold the global state
 const AppContext = createContext();
