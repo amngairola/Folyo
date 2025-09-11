@@ -1,8 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { assets, dashboard_data } from "../../assets/assets";
 import BlogTable from "../../components/admin/BlogTable";
-
+import { useAppContext } from "../../context/AppContext";
 const DashBoard = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [draftBlogs, setdraftBlogs] = useState([]);
+
+  const { axios } = useAppContext();
+
+  const fetchBlog = async () => {
+    try {
+      const { data } = await axios.get("/api/admin/blogs");
+      if (data.success) {
+        console.log(data);
+        setBlogs(data.blogs);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlog();
+  }, []);
+
+  useEffect(() => {
+    const draft = blogs.filter((blog) => blog.isPublished === false);
+    setdraftBlogs(draft);
+  }, [blogs]);
+
+  const [comments, setComments] = useState([]);
+
+  const fetchComments = async () => {
+    try {
+      const { data } = await axios.get("/api/admin/comments");
+      if (data.success) {
+        setComments(data.comments);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+  console.log(comments);
+
   const [dashBoardData, setDashBoardData] = React.useState({
     blogs: 0,
     comments: 0,
@@ -28,9 +77,7 @@ const DashBoard = () => {
             className="w-12 h-12 mr-5"
           />
           <div>
-            <h3 className="text-3xl font-bold text-gray-900">
-              {dashBoardData.blogs}
-            </h3>
+            <h3 className="text-3xl font-bold text-gray-900">{blogs.length}</h3>
             <p className="text-gray-500">Blogs</p>
           </div>
         </div>
@@ -44,7 +91,7 @@ const DashBoard = () => {
           />
           <div>
             <h3 className="text-3xl font-bold text-gray-900">
-              {dashBoardData.comments}
+              {comments.length}
             </h3>
             <p className="text-gray-500">Comments</p>
           </div>
@@ -59,7 +106,7 @@ const DashBoard = () => {
           />
           <div>
             <h3 className="text-3xl font-bold text-gray-900">
-              {dashBoardData.drafts}
+              {draftBlogs.length}
             </h3>
             <p className="text-gray-500">Drafts</p>
           </div>
@@ -114,11 +161,11 @@ const DashBoard = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dashBoardData.recentBlogs.map((blog, index) => (
+              {blogs.map((blog, index) => (
                 <BlogTable
                   key={blog._id}
                   blog={blog}
-                  fetchBlog={fetchDashBoard}
+                  fetchBlog={fetchBlog}
                   index={index + 1}
                 />
               ))}

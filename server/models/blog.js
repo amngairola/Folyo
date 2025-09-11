@@ -20,7 +20,6 @@ const blogSchema = new mongoose.Schema(
     },
     // The category of the blog post (e.g., "Technology", "Lifestyle")
     category: {
-      // Note: There is a typo here, it should likely be "category"
       required: true,
       type: String,
     },
