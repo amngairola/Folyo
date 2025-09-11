@@ -2,6 +2,7 @@ import fs from "fs";
 import imagekit from "../config/imageKit.js";
 import Blog from "../models/blog.js";
 import comment from "../models/comment.js";
+import main from "./../config/gemini.js";
 
 export const createBlog = async (req, res) => {
   try {
@@ -165,6 +166,7 @@ export const addComment = async (req, res) => {
     });
   }
 };
+
 export const getComment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -180,6 +182,31 @@ export const getComment = async (req, res) => {
     res.json({
       success: true,
       comments,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const genrateWithAi = async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    const fullPrompt = `
+    Generate a comprehensive and engaging blog post on the following topic: "${prompt}".
+    
+    The blog post should include:
+    1. An interesting introduction.
+    2. At least three main points with clear headings.
+    3. A concluding summary.
+    Please write in an informative and accessible tone.
+    `;
+    const response = await main(fullPrompt);
+    res.json({
+      success: true,
+      response,
     });
   } catch (error) {
     res.json({

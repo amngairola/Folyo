@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 import { useAppContext } from "../../context/AppContext";
 import Loader from "../../components/Loader";
+import { parse } from "marked";
 
 const Addblog = () => {
   // State specifically for the image file
@@ -25,6 +26,7 @@ const Addblog = () => {
   // State to manage the loading status of the form submission
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState(false);
 
   // Get the pre-configured axios instance from the global context
   const { axios } = useAppContext();
@@ -32,9 +34,31 @@ const Addblog = () => {
   // Refs to hold the Quill editor container and the Quill instance itself
   const editorRef = useRef(null);
   const quillRef = useRef(null);
+  // genrate with ai
+  const handleGenerateWithAi = async () => {
+    if (!title) return toast.error("Please enter a title");
+    try {
+      setIsLoadingData(true);
+      const { data } = await axios.post("api/blog/genrate", {
+        prompt: blogData.title,
+      });
 
-  const handleGenerateWithAi = () => {
-    console.log("genrate With Ai working");
+      if (data.success) {
+        // const generatedText = data.response.candidates[0].content.parts[0].text;
+
+        // 3. Use Quill's API to paste the HTML into the editor
+        quillRef.current.root.innerHTML = parse(
+          data.response.candidates[0]?.content?.parts?.[0]?.text
+        );
+      } else {
+        toast.error(data.message || "An unknown error occurred.");
+      }
+    } catch (error) {
+      console.error("Failed to generate AI content:", error);
+      toast.error("Failed to connect to the AI service.");
+    } finally {
+      setIsLoadingData(false);
+    }
   };
 
   // Initialize the Quill editor once on component mount
@@ -212,11 +236,46 @@ const Addblog = () => {
             </label>
 
             {/* Styled container for the Quill editor */}
-            <div
-              id="description"
-              ref={editorRef}
-              style={{ minHeight: "250px" }}
-            ></div>
+
+            <div className="relative">
+              {/* The Quill editor container */}
+              <div
+                id="description"
+                ref={editorRef}
+                style={{ minHeight: "250px" }}
+              ></div>
+
+              {/* Loader Overlay with Blurred Background */}
+              {isLoadingData && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg z-10">
+                  <div className="flex flex-col items-center">
+                    <svg
+                      className="animate-spin h-10 w-10 text-green-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    <p className="mt-2 text-sm font-semibold text-gray-700">
+                      Generating content...
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Styled "Generate with AI" button */}
             <button
@@ -224,7 +283,7 @@ const Addblog = () => {
               onClick={handleGenerateWithAi}
               className="mt-4 inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Generate with AI
+              {isLoadingData ? `Generating with AI....` : `Generate with AI`}
               {/* Optional: Add a spark icon for better UI */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"

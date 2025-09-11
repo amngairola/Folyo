@@ -7,6 +7,7 @@ import {
   addComment,
   createBlog,
   deleteBlogById,
+  genrateWithAi,
   getAllBlog,
   getBlogById,
   getComment,
@@ -31,5 +32,6 @@ blogRouter.post("/delete", auth, deleteBlogById);
 blogRouter.post("/toggle-publish", auth, togglePublish);
 blogRouter.post("/add-comment", addComment);
 blogRouter.get("/comments/:id", getComment);
+blogRouter.post("/genrate", auth, genrateWithAi);
 
 export default blogRouter;
