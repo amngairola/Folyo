@@ -1,14 +1,32 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
+
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { axios } = useAppContext();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(email);
-    setEmail("");
-    // console.log(email);
+    setIsSubscribing(true);
+
+    try {
+      const { data } = await axios.post("/api/newsLetter/subscribe", { email });
+      if (data.success) {
+        toast.success(data.message);
+        setEmail("");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsSubscribing(false);
+    }
   };
 
   return (
@@ -26,7 +44,7 @@ const NewsLetter = () => {
           className="w-full flex flex-col sm:flex-row items-center gap-4"
         >
           <input
-            type="email" // Changed to type="email" for better validation
+            type="email"
             placeholder="Enter your email"
             required
             name="email"
@@ -36,11 +54,15 @@ const NewsLetter = () => {
           />
 
           <button className="bg-transparent border-none p-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 transition-transform active:scale-95">
-            <img
-              src={assets.subscribe_icon}
-              alt="subscribe "
-              className="w-12 h-13 cursor-pointer hover:opacity-80"
-            />
+            {isSubscribing ? (
+              "Subscribing..."
+            ) : (
+              <img
+                src={assets.subscribe_icon}
+                alt="subscribe "
+                className="w-12 h-13 cursor-pointer hover:opacity-80"
+              />
+            )}
           </button>
         </form>
       </div>

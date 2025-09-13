@@ -3,6 +3,8 @@ import imagekit from "../config/imageKit.js";
 import Blog from "../models/blog.js";
 import comment from "../models/comment.js";
 import main from "./../config/gemini.js";
+import Subscriber from "../models/subscriber.js";
+import { sendNewPostEmail } from "../config/email.js";
 
 export const createBlog = async (req, res) => {
   try {
@@ -47,7 +49,7 @@ export const createBlog = async (req, res) => {
     });
 
     // Create a new blog post in the database
-    await Blog.create({
+    const newBlog = await Blog.create({
       title,
       subTitle,
       description,
@@ -56,12 +58,24 @@ export const createBlog = async (req, res) => {
       isPublished,
     });
 
+    if (isPublished) {
+      const subscribers = await Subscriber.find({});
+      console.log(subscribers);
+
+      // Loop through each subscriber and send the new post email.
+      // We don't need to 'await' the result of each email before responding to the admin.
+      // This allows the emails to be sent in the background for a faster API response.
+      for (const sub of subscribers) {
+        sendNewPostEmail(sub.email, newBlog);
+      }
+    }
+
     res.json({
       success: true,
       message: "Blog created successfully",
     });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
