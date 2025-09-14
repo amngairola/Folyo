@@ -5,9 +5,9 @@ import comment from "../models/comment.js";
 // --- Admin Login Controller ---
 export const adminLogin = async (req, res) => {
   try {
-    console.log("req successfull");
+    // console.log("req successfull");
     // You should log req.body directly
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password } = req.body;
 
     if (
@@ -21,7 +21,9 @@ export const adminLogin = async (req, res) => {
     }
 
     // If login is successful, create a JWT for authentication
-    const token = jwt.sign({ email }, process.env.JWT_SECRET);
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
     res.json({
       success: true,
       token,
